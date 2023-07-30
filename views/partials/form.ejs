@@ -1,0 +1,27 @@
+<form action="/compose" method="POST" enctype="multipart/form-data">
+    <div class="form-group">
+          <label for="postTitle">Title</label>
+          <input type="text" class="form-control" name="postTitle" required>
+      </div>
+      <div class="form-group">
+        <label for="postDescription">Description</label>
+        <input type="text" class="form-control" name="postDescription" required>
+    </div>
+    <div class="form-group">
+        <label for="postAuthor">Author</label>
+        <input type="text" class="form-control" name="postAuthor" required>
+    </div>
+      <div class="form-group">
+          <label for="postBody">Post</label>
+          <textarea class="form-control" name="postBody" rows="5" cols="30" required></textarea>   
+      </div>
+      <div class="form-group">
+        <label for="image">Upload Image</label>
+        <input type="file" id="image" name="image">
+    </div>
+    <div class="form-group">
+        <label for="postAltImageName">Alt Image Name</label>
+        <input type="text" class="form-control" name="postAltImageName">
+    </div>
+      <button class="btn btn-primary" type="submit">Publish</button>  
+  </form>

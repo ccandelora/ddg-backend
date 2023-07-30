@@ -1,0 +1,7 @@
+
+<h1><%= post.title %></h1>
+<p><%= post.description %></p>
+<p><%= post.author%></p>
+<p><%= post.body %></p>
+<img src="data:image/<%=post.image.contentType%>;base64, <%=post.image.data.toString('base64')%>"/>
+<p><%= post.altImageName %></p>
