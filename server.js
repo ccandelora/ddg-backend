@@ -15,7 +15,7 @@ const mongoose = require("mongoose");
 
 app.use(cors());
 const corsOptions = {
-    origin: "https://plankton-app-exmbl.ondigitalocean.app/"
+    origin: ["https://plankton-app-exmbl.ondigitalocean.app", "http://localhost:3000", "http://localhost:5000", "https://oyster-app-sus4c.ondigitalocean.app"],
 };
 
 const queueTimesBase = "https://queue-times.com/en-US/parks";
