@@ -18,6 +18,14 @@ const corsOptions = {
     origin: ["https://plankton-app-exmbl.ondigitalocean.app", "http://localhost:3000", "http://localhost:5000", "https://oyster-app-sus4c.ondigitalocean.app"],
 };
 
+app.use(function(req, res, next) {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  res.setHeader('Access-Control-Allow-Credentials', true);
+  next();
+});
+
 const queueTimesBase = "https://queue-times.com/en-US/parks";
 const requestMagicKingdomWaitTimes = queueTimesBase + "/6/queue_times.json";
 const requestEpcotWaitTimes = queueTimesBase + "/7/queue_times.json";
