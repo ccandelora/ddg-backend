@@ -152,7 +152,7 @@ app.get("/hollywood-studios-data", cors(corsOptions), async (req, res) => {
   res.json(jsonResponse);
 });
 
-app.get("/aniaml-kingdom-data", cors(corsOptions), async (req, res) => {
+app.get("/animal-kingdom-data", cors(corsOptions), async (req, res) => {
   const fetchOptions = {
       method: 'GET'
   }
