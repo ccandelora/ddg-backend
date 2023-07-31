@@ -52,7 +52,7 @@ const storage = multer.diskStorage({
         cb(null, 'uploads')
     },
     filename: (req, file, cb) => {
-        cb(null, file.fieldname + '-' + Date.now() + '.jpg')
+        cb(null, file.originalname.split('.').slice(0, -1).join('.') + '-' + Date.now() + '.jpg')
     }
 });
  
@@ -83,16 +83,15 @@ app.get("/posts", function (req, res) {
   });
 
   app.post("/compose", upload.single('image'), function (req, res) {
-    console.log(req.body);
     const postTitle = req.body.postTitle;
     const postBody = req.body.postBody;
     const postAuthor = req.body.postAuthor;
     const postDescription = req.body.postDescription;
-    console.log(req.file);
+    const postSlug = _.kebabCase(postTitle);
     const postImage = {
         data: fs.readFileSync(path.join(__dirname + '/uploads/' + req.file.filename)),
         contentType: 'image/jpg'}
-    const postAltImageName = req.body.postAltImageName;
+    const postAlt = req.body.postAlt;
     const post = new Post({
       title: postTitle,
       body: postBody,
@@ -100,7 +99,8 @@ app.get("/posts", function (req, res) {
       description: postDescription,
       image: postImage,
       fileName: req.file.filename,
-      altImageName: postAltImageName
+      alt: postAlt,
+      slug: postSlug,
     });
     post.save();
     console.log("post saved");

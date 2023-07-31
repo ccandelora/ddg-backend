@@ -26,7 +26,10 @@ let postSchema = new Schema({
     fileName: {
         type: String,
     },
-    altImageName: {
+    alt: {
+        type: String,
+    },
+    slug: {
         type: String,
     },
 }, 
