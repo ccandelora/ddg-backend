@@ -110,9 +110,10 @@ app.get("/posts", function (req, res) {
   });
   
   app.get("/post/:slug", function (req, res) {
-    Post.findOne({slug: req.params.postId }).then((postItem) => {
+    Post.findOne({slug: req.params.slug }).then((postItem) => {
       if (postItem !== null) {
         //res.render("post", {post: postItem});
+        console.log(postItem);
         res.json({ post: postItem });
       } else {
         console.log("No matching post found");
