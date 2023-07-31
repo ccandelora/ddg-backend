@@ -32,6 +32,9 @@ let postSchema = new Schema({
     slug: {
         type: String,
     },
+    category: {
+        type: String,
+    },
 }, 
     { timestamps: true }
 );

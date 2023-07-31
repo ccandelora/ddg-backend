@@ -88,6 +88,7 @@ app.get("/posts", function (req, res) {
     const postAuthor = req.body.postAuthor;
     const postDescription = req.body.postDescription;
     const postSlug = _.kebabCase(postTitle);
+    const postCategory = req.body.postCategory;
     const postImage = {
         data: fs.readFileSync(path.join(__dirname + '/uploads/' + req.file.filename)),
         contentType: 'image/jpg'}
@@ -101,16 +102,15 @@ app.get("/posts", function (req, res) {
       fileName: req.file.filename,
       alt: postAlt,
       slug: postSlug,
+      category: postCategory,
     });
     post.save();
     console.log("post saved");
     res.redirect("/");
   });
   
-  app.get("/post/:postId", function (req, res) {
-    const oid = new mongoose.mongo.ObjectId(req.params.postId);
-    console.log(oid);
-    Post.findOne({_id: oid }).then((postItem) => {
+  app.get("/post/:slug", function (req, res) {
+    Post.findOne({slug: req.params.postId }).then((postItem) => {
       if (postItem !== null) {
         //res.render("post", {post: postItem});
         res.json({ post: postItem });
