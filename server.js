@@ -89,16 +89,12 @@ app.get("/posts", function (req, res) {
     const postDescription = req.body.postDescription;
     const postSlug = _.kebabCase(postTitle);
     const postCategory = req.body.postCategory;
-    const postImage = {
-        data: fs.readFileSync(path.join(__dirname + '/uploads/' + req.file.filename)),
-        contentType: 'image/jpg'}
     const postAlt = req.body.postAlt;
     const post = new Post({
       title: postTitle,
       body: postBody,
       author: postAuthor,
       description: postDescription,
-      image: postImage,
       fileName: req.file.filename,
       alt: postAlt,
       slug: postSlug,
