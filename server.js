@@ -91,7 +91,7 @@ app.get("/posts", function (req, res) {
 });
 
 app.get("/this-week", function (req, res) {
-  Post.find({createdAt:{$gte: new Date(new Date() - 7 * 60 * 60 * 24 * 1000)}}).then((foundPosts) => {
+  Post.find({createdAt:{$gte: new Date(new Date() - 7 * 60 * 60 * 24 * 1000)}}).limit(4).sort({"createdAt": -1}).then((foundPosts) => {
     if (foundPosts.length > 0) {
       res.json({ posts: foundPosts });
     } else {
