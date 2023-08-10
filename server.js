@@ -1,4 +1,5 @@
 require("dotenv").config({ path: ".env" });
+const basicAuth = require('basic-auth');
 const express = require("express");
 const cors = require("cors");
 const fetch = require("node-fetch");
@@ -12,6 +13,22 @@ const _ = require("lodash");
 const fs = require("fs");
 const path = require("path");
 const mongoose = require("mongoose");
+
+const auth = function (req, res, next) {
+  var user = basicAuth(req);
+  if (!user || !user.name || !user.pass) {
+    res.set('WWW-Authenticate', 'Basic realm=Authorization Required');
+    res.sendStatus(401);
+    return;
+  }
+  if (user.name === process.env.BASIC_AUTH_USER && user.pass === process.env.BASIC_AUTH_PASSWORD) {
+    next();
+  } else {
+    res.set('WWW-Authenticate', 'Basic realm=Authorization Required');
+    res.sendStatus(401);
+    return;
+  }
+}
 
 app.use(cors());
 const corsOptions = {
@@ -71,7 +88,7 @@ const upload = multer({ storage: storage });
 
 app.use(express.static("public"));
 
-app.get("/", function (req, res) {
+app.get("/", auth, function (req, res) {
   res.render("compose");
 });
 
@@ -104,7 +121,7 @@ app.get("/this-week", function (req, res) {
     
 });
 
-app.get("/compose", function (req, res) {
+app.get("/compose", auth, function (req, res) {
   res.render("compose");
 });
 
