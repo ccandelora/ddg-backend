@@ -133,6 +133,9 @@ app.post("/compose", upload.single("image"), function (req, res) {
   const postSlug = _.kebabCase(postTitle);
   const postCategory = req.body.postCategory;
   const postAlt = req.body.postAlt;
+  const postPhotographer = req.body.postPhotographer;
+  const postPhotographerUrl = req.body.postPhotographerUrl;
+  const postCategorySlug = _.kebabCase(postCategory);
   const post = new Post({
     title: postTitle,
     body: postBody,
@@ -142,6 +145,9 @@ app.post("/compose", upload.single("image"), function (req, res) {
     alt: postAlt,
     slug: postSlug,
     category: postCategory,
+    categorySlug: postCategorySlug,
+    photographer: postPhotographer,
+    photographerUrl: postPhotographerUrl,
   });
   post.save();
   console.log("post saved");

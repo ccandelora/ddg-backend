@@ -31,6 +31,16 @@ let postSchema = new Schema({
     category: {
         type: String,
     },
+    categorySlug: {
+        type: String,
+    },
+    photographer: {
+        type: String,
+    },
+    photographerUrl: {
+        type: String,
+    },
+    
 }, 
     { timestamps: true }
 );
